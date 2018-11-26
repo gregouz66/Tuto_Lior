@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block active_blog %}active{% endblock %}
+
+{% block body %}
+<div class="ui raised very padded text container segment">
+    <div class="ui breadcrumb">
+        <a class="section">Blog</a>
+        <i class="right angle icon divider"></i>
+        <a class="section">{{ article.category.title | truncate(15, false, '...') }}</a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">{{ article.title | truncate(15, false, '...') }}</div>
+      </div>
+
+  <div class="ui unstackable items">
+    <div class="item">
+      <div class="image">
+        <img src="{{ article.image }}">
+      </div>
+      <div class="content">
+        <a class="header">{{ article.title }}</a>
+        <div class="meta">
+          <span>{{ article.content | raw }}</span>
+        </div>
+        <div class="description">
+          <p></p>
+        </div>
+        <div class="extra">
+          Crée le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui comments">
+      <h3 class="ui dividing header">Commentaires</h3>
+      
+      {% for comment in article.comments %}
+      <div class="comment">
+        <a class="avatar">
+          <img src="https://lorempixel.com/640/480/?75146">
+        </a>
+        <div class="content">
+          <a class="author">{{ comment.author }}</a>
+          <div class="metadata">
+            <span class="date">{{ comment.createdAt | date('d/m/Y à H:i') }}</span>
+          </div>
+          <div class="text">
+            <p>{{ comment.content | raw}}</p>
+          </div>
+          {# <div class="actions">
+            <a class="reply">Reply</a>
+          </div> #}
+        </div>
+        {# <div class="comments">
+          <div class="comment">
+            <a class="avatar">
+              <img src="https://lorempixel.com/640/480/?65101">
+            </a>
+            <div class="content">
+              <a class="author">Jenny Hess</a>
+              <div class="metadata">
+                <span class="date">Just now</span>
+              </div>
+              <div class="text">
+                Elliot you are always so right :)
+              </div>
+              <div class="actions">
+                <a class="reply">Reply</a>
+              </div>
+            </div>
+          </div>
+        </div> #}
+      </div>
+      {% endfor %}
+
+      {{ form_start(formComment) }}
+
+        {{ form_row(formComment.author, {'attr': {'placeholder': "Votre nom et prénom"}}) }}
+        {{ form_row(formComment.content, {'attr': {'placeholder': "Votre commentaire"}}) }}
+
+        <button type="submit" class="ui blue labeled submit icon button">
+            <i class="icon edit"></i> Ajouter mon commentaire
+        </button>
+
+      {{ form_end(formComment) }}
+
+    </div>
+</div>
+{% endblock %}

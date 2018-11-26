@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <!-- SEMANTIC -->
+        <link rel="stylesheet" href="{{ asset('assets/css/semantic.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/icon.min.css') }}">
+        <!-- JQUERY CONFIRM -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <style media="screen">
+          .ui.menu { margin: 0; }
+        </style>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+        <div class="ui labeled icon menu">
+          <a class="item {% block active_accueil %}{% endblock %}" href="{{ path('index') }}">
+            <i class="archive icon"></i>
+            Accueil
+          </a>
+          <a class="item {% block active_blog %}{% endblock %}" href="{{ path('blog') }}">
+            <i class="video camera icon"></i>
+            Blog
+          </a>
+          <a class="item {% block active_create %}{% endblock %}" href="{{ path('blog_create') }}">
+            <i class="video play icon"></i>
+            Créer un article
+          </a>
+        </div>
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        <!-- JQUERY -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- SEMANTIC -->
+        <script type="text/javascript" src="{{ assets }}assets/js/semantic.min.js"></script>
+        <!-- JQUERY CONFIRM -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <style>
+          .jconfirm {
+            z-index: 99999999999!important;
+          }
+        </style>
+        <script src="assets/js/manage-cookies.js"></script>
+    </body>
+</html>
